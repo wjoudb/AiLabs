@@ -1,0 +1,90 @@
+Task 1:
+
+38 ?- house = house.
+true.
+
+-> Identical atoms; a constant unifies with itself.
+
+39 ?- house = abc.
+false.
+
+-> Two different constants never unify.
+
+40 ?- edge(a,b) = edge(C,b).
+C = a.
+
+-> Same functor, 2 args each; C instantiated to a, b matches b.
+
+41 ?- edge(a,d) = edge(C,B).
+C = a,
+B = d.
+
+-> Same functor and arity; each variable takes the matching value.
+
+42 ?- edge(C,B) = edge(a,d).
+C = a,
+B = d.
+
+-> Same as above; unification works in both directions.
+
+43 ?- edge(A,f(g,h)) = edge(a,B).
+A = a,
+B = f(g, h).
+
+-> A variable unifies with any term, including a whole structure.
+
+44 ?- edge(A,A) = edge(b,c).
+false.
+
+-> A becomes b, then the same A would need to be c. Same variable must hold the same value.
+
+45 ?- edge(A,A) = edge(b,b).
+A = b.
+
+-> Both positions of A agree on b.
+
+46 ?- A = B, B = f.
+A = B, B = f.
+
+-> A and B are linked, then B gets f, so A is f too.
+
+47 ?- A = B, B = f, A = e.
+false.
+
+-> A is already f through the link, and f = e fails (two different constants).
+
+
+Task2: 
+
+All females:
+51 ?- female(X).
+X = sara ;
+X = nora.
+
+Is there any male:
+52 ?- male(_).
+true ;
+true ;
+true ;
+true ;
+true ;
+true.
+
+Grandparent of Faisal:
+53 ?- parent(P, faisal), parent(G, P).
+P = muhammad,
+G = ali.
+
+Daughters of Ahmad:
+54 ?- parent(ahmad, X), female(X).
+X = sara ;
+X = nora ;
+false.
+
+Do Ahmad and Muhammad have a common parent:
+55 ?- parent(P, ahmad), parent(P, muhammad).
+P = ali.
+
+Is Khan the brother of Nora:
+56 ?- male(khan), parent(P, khan), parent(P, nora).
+P = ahmad.
